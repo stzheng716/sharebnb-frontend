@@ -14,7 +14,8 @@ import SignUpForm from "./SignUpForm";
  */
 
 function RoutesList({ handleLogIn, handleSignUp, handleUpdate, error }) {
-  const user = useContext(userContext);
+  // const user = useContext(userContext);
+  const user = {user:"username"}
 
   if (user.user) {
     return (
