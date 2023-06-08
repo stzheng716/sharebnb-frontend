@@ -13,14 +13,20 @@ import SignUpForm from "./SignUpForm";
  * Component to hold the routes
  */
 
-function RoutesList({ handleLogIn, handleSignUp, handleUpdate, error }) {
+function RoutesList({
+  handleLogIn,
+  handleSignUp,
+  handleUpdate,
+  error,
+  listings,
+}) {
   // const user = useContext(userContext);
-  const user = {user:"username"}
+  const user = { user: "username" };
 
   if (user.user) {
     return (
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={<Home listings={listings} />} />
         <Route path="/listings/create" element={<ListingForm />} />
         <Route path="/listings/:id" element={<ListingDetail />} />
         {/* <Route

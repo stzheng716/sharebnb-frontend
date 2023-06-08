@@ -1,20 +1,42 @@
-import { BrowserRouter } from 'react-router-dom';
-import './App.css';
-import RoutesList from './RoutesList';
-import ShareBnBApi from './api';
-import NavBar from './NavBar';
+import { useState, useEffect } from "react";
+import { BrowserRouter } from "react-router-dom";
+import "./App.css";
+import RoutesList from "./RoutesList";
+import ShareBnBApi from "./api";
+import NavBar from "./NavBar";
+import axios from "axios";
+
+const API_URL = "http://localhost:5001";
 
 function App() {
+  const [listings, setListings] = useState(null);
+
   // const [currUser, setCurrUser] = useState({ user: null, isLoaded: false });
   // const [token, setToken] = useState(
   //   localStorage.getItem(LOCAL_STORAGE_TOKEN_KEY)
-  // );  
+  // );
+
+  async function getListings() {
+    const options = { method: "GET", url: "http://localhost:5001/listings" };
+
+    const listings = await axios.request(options);
+    // const listings = await axios.get(`${API_URL}/listings`);
+    setListings(listings);
+  }
+  getListings();
+  console.log("🚀 > listings=", listings);
 
   // useEffect(
-  //   function changeUser() {
-  //     getUser();
+  //   function getListingsOnMount() {
+  //     console.log("here");
+  //     async function getListings() {
+  //       console.log("hit here");
+  //       const listings = await ShareBnBApi.getListings();
+  //       setListings(listings);
+  //     }
+  //     getListings();
   //   },
-  //   [token]
+  //   [listings]
   // );
 
   // async function getUser() {
@@ -63,14 +85,15 @@ function App() {
   return (
     <div className="App">
       {/* <userContext.Provider value={currUser}> */}
-        <BrowserRouter>
-          <NavBar handleLogout={handleLogout} />
-          <RoutesList
-            // handleLogIn={handleLogIn}
-            // handleSignUp={handleSignUp}
-            // handleUpdate={handleUpdate}
-          />
-        </BrowserRouter>
+      <BrowserRouter>
+        <NavBar handleLogout={handleLogout} />
+        <RoutesList
+          listings={listings}
+          // handleLogIn={handleLogIn}
+          // handleSignUp={handleSignUp}
+          // handleUpdate={handleUpdate}
+        />
+      </BrowserRouter>
       {/* </userContext.Provider> */}
     </div>
   );

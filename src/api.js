@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const BASE_URL = process.env.REACT_APP_BASE_URL || "http://localhost:3001";
+const BASE_URL = "http://localhost:5001";
 
 /** API Class.
  *
@@ -22,7 +22,7 @@ class ShareBnBApi {
     const params = method === "get" ? data : {};
 
     try {
-      return (await axios({ url, method, data, params, headers })).data;
+      return await axios({ url, method, data, params, headers });
     } catch (err) {
       console.error("API Error:", err.response);
       let message = err.response.data.error.message;
@@ -44,6 +44,7 @@ class ShareBnBApi {
 
   static async getListings() {
     let res = await this.request("listings");
+    console.log("🚀 > ShareBnBApi > getListings > res.listings=", res.listings);
     return res.listings;
   }
 
