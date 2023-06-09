@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { Button, Form, Row } from "react-bootstrap";
 
 /** Search widget.
  *
@@ -29,26 +30,22 @@ function SearchForm({ handleSearch }) {
   }
 
   return (
-    <div className="SearchForm mb-4">
-      <form onSubmit={handleSubmit}>
-        <div className="row justify-content-center justify-content-lg-start gx-0">
-          <div className="col-8">
-            <input
-              className="form-control form-control-lg"
-              name="q"
-              placeholder="Enter search term.."
-              value={searchTerm}
-              onChange={handleChange}
-            />
-          </div>
-          <div className="col-auto">
-            <button type="submit" className="btn btn-lg btn-primary">
-              Submit
-            </button>
-          </div>
+    <Form onSubmit={handleSubmit}>
+      <Form.Group className="justify-content-center justify-content-lg-start gx-0">
+        <div className="d-flex align-items-center col-10 justify-content-center ">
+          <input
+            className="form-control form-control-lg me-2"
+            name="q"
+            placeholder="Enter search term.."
+            value={searchTerm}
+            onChange={handleChange}
+          />
+          <button type="submit" className="btn btn-lg btn-primary">
+            Submit
+          </button>
         </div>
-      </form>
-    </div>
+      </Form.Group>
+    </Form>
   );
 }
 

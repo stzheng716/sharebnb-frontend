@@ -1,9 +1,8 @@
 import React, { useContext } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import ListingCard from "./ListingCard";
 import ShareBnBApi from "./api";
 import SearchForm from "./SearchForm";
-import "./Home.css";
 /** Home component.
  *
  * RouteList -> Home
@@ -11,7 +10,7 @@ import "./Home.css";
  * Renders home page with background
  */
 
-function Home({ listings, handleSearch }) {
+function ListingList({ listings, handleSearch }) {
   //   const user = useContext(userContext);
   //   const navigate = useNavigate();
 
@@ -22,23 +21,16 @@ function Home({ listings, handleSearch }) {
   //     navigate("/signup");
   //   }
 
+  console.log("🚀 > ListingList > listings=", listings);
   return (
     <div className="background">
       <div>
-        <SearchForm handleSearch={handleSearch} />
-        <h1 className="displayText">Find Your Dream In Nature</h1>
+        <h1 className="displayText">ShareBnB!</h1>
       </div>
-      <div>
-        {listings &&
-          listings.map((l) => (
-            <Link to={`/listings/${l.id}`}>
-              {" "}
-              <ListingCard key={l.id} listing={l} />
-            </Link>
-          ))}
-      </div>
+      <SearchForm handleSearch={handleSearch} />
+      {listings && listings.map((l) => <ListingCard key={l.id} listing={l} />)}
     </div>
   );
 }
 
-export default Home;
+export default ListingList;

@@ -1,10 +1,15 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
+import userContext from "./userContext";
+import { useNavigate } from "react-router-dom";
+
 function ListingForm({ addListing }) {
   const [formData, setFormData] = useState({});
+  const user = useContext(userContext);
+  const navigate = useNavigate();
 
   function handleChange(evt) {
     const input = evt.target;
-    if (input.type === 'file') {
+    if (input.type === "file") {
       setFormData((formData) => ({
         ...formData,
         [input.name]: input.files[0],
@@ -16,10 +21,12 @@ function ListingForm({ addListing }) {
       }));
     }
   }
+  console.log("formData", formData);
 
   async function handleSubmit(evt) {
     evt.preventDefault();
     const newListing = await addListing(formData);
+    navigate("/");
   }
 
   return (
@@ -133,7 +140,7 @@ function ListingForm({ addListing }) {
                 className="form-control"
                 value={formData.username}
                 onChange={handleChange}
-                placeholder="hostuser"
+                placeholder={user.username}
                 required
               />
             </div>
@@ -149,9 +156,7 @@ function ListingForm({ addListing }) {
             </div>
 
             <div className="d-grid">
-              <button className="btn btn-primary">
-                Save Changes
-              </button>
+              <button className="btn btn-primary">Save Changes</button>
             </div>
           </form>
         </div>

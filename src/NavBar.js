@@ -2,6 +2,11 @@ import React, { useContext } from "react";
 import { NavLink, Link } from "react-router-dom";
 import userContext from "./userContext";
 
+import Container from "react-bootstrap/Container";
+import Nav from "react-bootstrap/Nav";
+import Navbar from "react-bootstrap/Navbar";
+import { Button } from "react-bootstrap";
+
 import "./Navbar.css";
 
 /** NavBar component.
@@ -16,52 +21,47 @@ function NavBar({ handleLogout, handleSearch }) {
 
   function loggedInNav() {
     return (
-      <ul className="navbar-nav ms-auto">
-        <li className="nav-item me-4">
+      <Navbar bg="light" expand="lg" variant="light">
+        <Container>
           <NavLink className="nav-link" to="/listings/create">
             Create Listing
           </NavLink>
-        </li>
-        {/* <li className="nav-item me-4">
-          <NavLink className="nav-link" to="/profile">
-            Profile
-          </NavLink>
-        </li> */}
-        <li className="nav-item">
-          <Link className="nav-link" to="/" onClick={handleLogout}>
+          <NavLink className="nav-link" to="/" onClick={handleLogout}>
             Log out
-          </Link>
-        </li>
-      </ul>
+          </NavLink>
+        </Container>
+      </Navbar>
     );
   }
 
   function loggedOutNav() {
     return (
-      <ul className="navbar-nav ms-auto">
-        <li className="nav-item me-4">
+      <Navbar bg="light" expand="lg" variant="light">
+        <Container>
           <NavLink className="nav-link" to="/login">
             Login
           </NavLink>
-        </li>
-        <li className="nav-item me-4">
           <NavLink className="nav-link" to="/signup">
             Sign Up
           </NavLink>
-        </li>
-      </ul>
+        </Container>
+      </Navbar>
     );
   }
 
   return (
-    <nav className="Navigation navbar navbar-expand-md">
-      <div className="container-fluid">
-        <Link className="navbar-brand" to="/" onClick={() =>handleSearch()}>
+    <Navbar bg="light" expand="lg" variant="light">
+      <Container>
+        <Navbar.Brand
+          className="navbar-brand"
+          href="/"
+          onClick={() => handleSearch()}
+        >
           ShareBnB
-        </Link>
+        </Navbar.Brand>
         {user ? loggedInNav() : loggedOutNav()}
-      </div>
-    </nav>
+      </Container>
+    </Navbar>
   );
 }
 

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import Button from "react-bootstrap/Button";
 function LogInForm({ handleLogIn }) {
   const [formData, setFormData] = useState({
     username: "",
@@ -61,10 +62,12 @@ function LogInForm({ handleLogIn }) {
           />
         </div>
 
-        <button variant="primary" type="submit">Log In</button>
+        <Button variant="primary" type="submit">
+          Log In
+        </Button>
       </form>
-    </div >
-  )
+    </div>
+  );
 }
 
-export default LogInForm
+export default LogInForm;
