@@ -14,13 +14,13 @@ class ShareBnBApi {
   // the token for interactive with the API will be stored here.
   static token;
 
-  static async request(endpoint, data = {}, method = "get") {
+  static async request(endpoint, data = {}, method = "get", contentType = "application/json") {
     console.debug("API Call:", endpoint, data, method);
 
     const url = `${BASE_URL}/${endpoint}`;
     const headers = {
       Authorization: `Bearer ${ShareBnBApi.token}`,
-      "Content-Type": "multipart/form-data"
+      "Content-Type": contentType
     };
     const params = method === "get" ? data : {};
 
@@ -28,12 +28,11 @@ class ShareBnBApi {
       return await axios({ url, method, data, params, headers });
     } catch (err) {
       console.error("API Error:", err.response);
-      let message = err.response.data.error.message;
-      throw Array.isArray(message) ? message : [message];
+      // let message = err.response.data.error.message;
+      // console.log(message);
+      // throw Array.isArray(message) ? message : [message];
     }
   }
-
-
 
   // Individual API routes
 
@@ -41,7 +40,7 @@ class ShareBnBApi {
 
   static async getCurrentUser(username) {
     let res = await this.request(`users/${username}`);
-    return res.user;
+    return res.data.user;
   }
 
   /** Get listings (filtered by name if not undefined) */
@@ -62,7 +61,9 @@ class ShareBnBApi {
   /** Post a listing. */
 
   static async postListing(formData) {
-    console.log(formData)
+
+    const headerType = "multipart/form-data"
+
     const form = new FormData();
     form.append("title", formData.title);
     form.append("details", formData.details);
@@ -76,14 +77,14 @@ class ShareBnBApi {
     form.append("username", formData.username);
 
 
-    let res = await this.request(`listings`, form, "post");
+    let res = await this.request(`listings`, form, "post", headerType);
     return res.data.listing;
   }
 
   /** Get token for login from username, password. */
 
   static async login(data) {
-    let res = await this.request(`auth/login`, data, "post");
+    const res = await this.request(`auth/login`, data, "post");
     return res.data.token;
   }
 

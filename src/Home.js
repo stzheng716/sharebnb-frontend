@@ -26,7 +26,7 @@ function Home({ listings }) {
       <div>
         <h1 className="displayText">ShareBnB!</h1>
       </div>
-      {listings.map((l) => (
+      {listings && listings.map((l) => (
         <ListingCard key={l.id} listing={l} />
       ))}
     </div>

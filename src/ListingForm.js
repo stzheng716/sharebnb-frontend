@@ -27,7 +27,7 @@ function ListingForm({ addListing }) {
       <h3>Create A Listing</h3>
       <div className="card">
         <div className="card-body">
-          <form>
+          <form onSubmit={handleSubmit}>
             <div className="mb-3">
               <label className="form-label">Title</label>
               <input
@@ -35,6 +35,9 @@ function ListingForm({ addListing }) {
                 className="form-control"
                 value={formData.title}
                 onChange={handleChange}
+                maxlength="40"
+                placeholder="title"
+                required
               />
             </div>
             <div className="mb-3">
@@ -44,6 +47,8 @@ function ListingForm({ addListing }) {
                 className="form-control"
                 value={formData.Details}
                 onChange={handleChange}
+                placeholder="details"
+                required
               />
             </div>
             <div className="mb-3">
@@ -53,6 +58,9 @@ function ListingForm({ addListing }) {
                 className="form-control"
                 value={formData.street}
                 onChange={handleChange}
+                placeholder="street"
+                maxlength="50"
+                required
               />
             </div>
             <div className="mb-3">
@@ -62,6 +70,9 @@ function ListingForm({ addListing }) {
                 className="form-control"
                 value={formData.city}
                 onChange={handleChange}
+                placeholder="city"
+                maxlength="30"
+                required
               />
             </div>
 
@@ -72,6 +83,9 @@ function ListingForm({ addListing }) {
                 className="form-control"
                 value={formData.state}
                 onChange={handleChange}
+                placeholder="CA"
+                maxlength="2"
+                required
               />
             </div>
 
@@ -82,6 +96,9 @@ function ListingForm({ addListing }) {
                 className="form-control"
                 value={formData.zip}
                 onChange={handleChange}
+                placeholder="91384"
+                maxlength="5"
+                required
               />
             </div>
 
@@ -92,6 +109,9 @@ function ListingForm({ addListing }) {
                 className="form-control"
                 value={formData.country}
                 onChange={handleChange}
+                placeholder="USA"
+                maxlength="3"
+                required
               />
             </div>
 
@@ -102,6 +122,8 @@ function ListingForm({ addListing }) {
                 className="form-control"
                 value={formData.price_per_night}
                 onChange={handleChange}
+                placeholder="99"
+                required
               />
             </div>
             <div className="mb-3">
@@ -111,6 +133,8 @@ function ListingForm({ addListing }) {
                 className="form-control"
                 value={formData.username}
                 onChange={handleChange}
+                placeholder="hostuser"
+                required
               />
             </div>
 
@@ -125,7 +149,7 @@ function ListingForm({ addListing }) {
             </div>
 
             <div className="d-grid">
-              <button className="btn btn-primary" onClick={handleSubmit}>
+              <button className="btn btn-primary">
                 Save Changes
               </button>
             </div>

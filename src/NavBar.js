@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { NavLink, Link } from "react-router-dom";
-// import userContext from "./userContext";
+import userContext from "./userContext";
 
 import "./Navbar.css";
 
@@ -11,8 +11,8 @@ import "./Navbar.css";
  * Renders links to home, companies, and jobs
  */
 //TODO: see if we can make NavLink active
-function NavBar() {
-  // const { user } = useContext(userContext);
+function NavBar({ handleLogout }) {
+  const user = useContext(userContext);
 
   function loggedInNav() {
     return (
@@ -28,7 +28,7 @@ function NavBar() {
           </NavLink>
         </li> */}
         <li className="nav-item">
-          <Link className="nav-link" to="/">
+          <Link className="nav-link" to="/" onClick={handleLogout}>
             Log out
           </Link>
         </li>
@@ -49,11 +49,6 @@ function NavBar() {
             Sign Up
           </NavLink>
         </li>
-        <li className="nav-item me-4">
-          <NavLink className="nav-link" to="/listings/create">
-            Add a Listing
-          </NavLink>
-        </li>
       </ul>
     );
   }
@@ -64,7 +59,7 @@ function NavBar() {
         <Link className="navbar-brand" to="/">
           ShareBnB
         </Link>
-        {false ? loggedInNav() : loggedOutNav()}
+        {user ? loggedInNav() : loggedOutNav()}
       </div>
     </nav>
   );
