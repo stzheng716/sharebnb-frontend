@@ -1,7 +1,8 @@
 import React, { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import ListingCard from "./ListingCard";
-
+import ShareBnBApi from "./api";
+import SearchForm from "./SearchForm";
 /** Home component.
  *
  * RouteList -> Home
@@ -9,8 +10,8 @@ import ListingCard from "./ListingCard";
  * Renders home page with background
  */
 
-function Home({ listings }) {
-    console.log("HOMELISTING", listings)
+function Home({ listings, handleSearch }) {
+  console.log("HOMELISTING", listings);
   //   const user = useContext(userContext);
   //   const navigate = useNavigate();
 
@@ -26,9 +27,8 @@ function Home({ listings }) {
       <div>
         <h1 className="displayText">ShareBnB!</h1>
       </div>
-      {listings && listings.map((l) => (
-        <ListingCard key={l.id} listing={l} />
-      ))}
+      <SearchForm handleSearch={handleSearch} />
+      {listings && listings.map((l) => <ListingCard key={l.id} listing={l} />)}
     </div>
   );
 }

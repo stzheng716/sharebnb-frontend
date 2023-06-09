@@ -7,7 +7,7 @@ import ShareBnBApi from "./api";
 import NavBar from "./NavBar";
 import jwt_decode from "jwt-decode";
 
-const LOCAL_STORAGE_TOKEN_KEY = "token"
+const LOCAL_STORAGE_TOKEN_KEY = "token";
 
 function App() {
   const [listings, setListings] = useState({ listing: null, isLoaded: false });
@@ -25,10 +25,9 @@ function App() {
     getListings();
   }, []);
 
-
   async function addListing(formData) {
     const listing = await ShareBnBApi.postListing(formData);
-    setListings(listings => ({
+    setListings((listings) => ({
       listing: [...listings.listing, listing],
       isLoaded: true,
     }));
@@ -60,44 +59,41 @@ function App() {
     setToken(token);
   }
 
-  // async function handleSignUp({
-  //   username,
-  //   firstName,
-  //   lastName,
-  //   email,
-  //   password,
-  //   isHost,
-  // }) {
-  //   const token = await ShareBnBApi.signUp(
-  //     username,
-  //     password,
-  //     firstName,
-  //     lastName,
-  //     email,
-  //     isHost
-  //   );
+  async function signup(signupData) {
+    let token = await ShareBnBApi.signup(signupData);
+    setToken(token);
+  }
 
   function handleLogout() {
     setCurrUser({ user: null, isLoaded: true });
     setToken("");
   }
 
+  async function search(name) {
+    console.log("🚀 > search > name=", name);
+    let listings = await ShareBnBApi.getListings(name);
+    console.log("🚀 > search > listings=", listings);
+    setListings({
+      listing: listings,
+      isLoaded: true,
+    });
+  }
 
   if (!listings.isLoaded) return <i>Loading...</i>;
 
   return (
     <div className="App">
       <userContext.Provider value={currUser.user}>
-      <BrowserRouter>
-        <NavBar handleLogout={handleLogout} />
-        <RoutesList
-          listings={listings.listing}
-          addListing={addListing}
-          handleLogIn={handleLogIn}
-        // handleSignUp={handleSignUp}
-        // handleUpdate={handleUpdate}
-        />
-      </BrowserRouter>
+        <BrowserRouter>
+          <NavBar handleLogout={handleLogout} />
+          <RoutesList
+            listings={listings.listing}
+            addListing={addListing}
+            handleLogIn={handleLogIn}
+            handleSignUp={signup}
+            handleSearch={search}
+          />
+        </BrowserRouter>
       </userContext.Provider>
     </div>
   );

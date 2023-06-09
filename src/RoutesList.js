@@ -21,14 +21,21 @@ function RoutesList({
   addListing,
   error,
   listings,
+  handleSearch,
 }) {
   const user = useContext(userContext);
 
   if (user) {
     return (
       <Routes>
-        <Route path="/" element={<Home listings={listings} />} />
-        <Route path="/listings/create" element={<ListingForm addListing={addListing} />} />
+        <Route
+          path="/"
+          element={<Home listings={listings} handleSearch={handleSearch} />}
+        />
+        <Route
+          path="/listings/create"
+          element={<ListingForm addListing={addListing} />}
+        />
         <Route path="/listings/:id" element={<ListingDetail />} />
         {/* <Route
           path="/users/username"
@@ -40,7 +47,10 @@ function RoutesList({
   } else {
     return (
       <Routes>
-        <Route path="/" element={<Home listings={listings}/>} />
+        <Route
+          path="/"
+          element={<Home listings={listings} handleSearch={handleSearch} />}
+        />
         <Route
           path="/login"
           element={<LogInForm handleLogIn={handleLogIn} />}

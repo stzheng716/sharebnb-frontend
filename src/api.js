@@ -14,13 +14,18 @@ class ShareBnBApi {
   // the token for interactive with the API will be stored here.
   static token;
 
-  static async request(endpoint, data = {}, method = "get", contentType = "application/json") {
+  static async request(
+    endpoint,
+    data = {},
+    method = "get",
+    contentType = "application/json"
+  ) {
     console.debug("API Call:", endpoint, data, method);
 
     const url = `${BASE_URL}/${endpoint}`;
     const headers = {
       Authorization: `Bearer ${ShareBnBApi.token}`,
-      "Content-Type": contentType
+      "Content-Type": contentType,
     };
     const params = method === "get" ? data : {};
 
@@ -46,8 +51,9 @@ class ShareBnBApi {
   /** Get listings (filtered by name if not undefined) */
   //TODO: add filtering route in backend
 
-  static async getListings() {
-    let res = await this.request("listings");
+  static async getListings(name) {
+    console.log("🚀 > ShareBnBApi > getListings > name=", { q: name });
+    let res = await this.request("listings", { q: name });
     return res.data.listings;
   }
 
@@ -61,8 +67,7 @@ class ShareBnBApi {
   /** Post a listing. */
 
   static async postListing(formData) {
-
-    const headerType = "multipart/form-data"
+    const headerType = "multipart/form-data";
 
     const form = new FormData();
     form.append("title", formData.title);
@@ -75,7 +80,6 @@ class ShareBnBApi {
     form.append("price_per_night", formData.price_per_night);
     form.append("image", formData.image);
     form.append("username", formData.username);
-
 
     let res = await this.request(`listings`, form, "post", headerType);
     return res.data.listing;
