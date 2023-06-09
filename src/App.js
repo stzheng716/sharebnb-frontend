@@ -16,23 +16,44 @@ function App() {
   //   localStorage.getItem(LOCAL_STORAGE_TOKEN_KEY)
   // );
 
-  useEffect(
-    function getListingsOnMount() {
-      async function getListings() {
-        const listings = await ShareBnBApi.getListings();
-        setListings({ listing: listings, isLoaded: true});
-        console.log("ASDFASFDA")
-      }
-      getListings();
-    },
-    [ ]
-  );
+  useEffect(function getListingsOnMount() {
+    async function getListings() {
+      const listings = await ShareBnBApi.getListings();
+      setListings({ listing: listings, isLoaded: true });
+      console.log("ASDFASFDA");
+    }
+    getListings();
+  }, []);
 
   async function addListing(formData) {
-    const res = await ShareBnBApi.postListing(formData)
+    const form = new FormData();
+    form.append("title", formData.title);
+    form.append("details", formData.details);
+    form.append("street", formData.street);
+    form.append("city", formData.city);
+    form.append("state", formData.state);
+    form.append("zip", formData.zip);
+    form.append("country", formData.country);
+    form.append("price_per_night", formData.price_per_night);
+    form.append("image", formData.image);
+    form.append("username", formData.username);
+
+    const options = {
+      method: "POST",
+      url: "http://localhost:5001/listings",
+      headers: {
+        "Content-Type":
+          "multipart/form-data; boundary=---011000010111000001101001",
+      },
+      data: form,
+    };
+
+    const res = await axios.request(options);
+    console.log("🚀 > addListing > res=", res);
+
+    // setListings(curr => {})
   }
-  // async function getUser() {
-  //   if (token) {
+  // async function getUser() {  //   if (token) {
   //     ShareBnBApi.token = token;
   //     const { username } = jwt_decode(token);
   //     const user = await ShareBnBApi.getCurrentUser(username);
@@ -81,7 +102,7 @@ function App() {
         <NavBar handleLogout={handleLogout} />
         <RoutesList
           listings={listings.listing}
-          addListing = {addListing}
+          addListing={addListing}
           // handleLogIn={handleLogIn}
           // handleSignUp={handleSignUp}
           // handleUpdate={handleUpdate}

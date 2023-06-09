@@ -18,7 +18,9 @@ class ShareBnBApi {
     console.debug("API Call:", endpoint, data, method);
 
     const url = `${BASE_URL}/${endpoint}`;
-    const headers = { Authorization: `Bearer ${ShareBnBApi.token}` };
+    const headers = {
+      Authorization: `Bearer ${ShareBnBApi.token}`,
+    };
     const params = method === "get" ? data : {};
 
     try {
@@ -29,6 +31,8 @@ class ShareBnBApi {
       throw Array.isArray(message) ? message : [message];
     }
   }
+
+
 
   // Individual API routes
 
@@ -57,6 +61,8 @@ class ShareBnBApi {
   /** Post a listing. */
 
   static async postListing(data) {
+    console.log("🚀 > ShareBnBApi > postListing > data=", data);
+
     let res = await this.request(`listings`, data, "post");
     return res.data.listing;
   }

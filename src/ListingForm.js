@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 function ListingForm({ addListing }) {
-
   const [formData, setFormData] = useState({});
 
   function handleChange(evt) {
@@ -13,7 +12,7 @@ function ListingForm({ addListing }) {
 
   async function handleSubmit(evt) {
     evt.preventDefault();
-      await addListing(formData);
+    await addListing(formData);
   }
 
   return (
@@ -25,7 +24,6 @@ function ListingForm({ addListing }) {
             <div className="mb-3">
               <label className="form-label">Title</label>
               <input
-                disabled
                 className="form-control"
                 placeholder="Title"
                 value={formData.Title}
@@ -98,6 +96,15 @@ function ListingForm({ addListing }) {
                 onChange={handleChange}
               />
             </div>
+            <div className="mb-3">
+              <label className="form-label">Username</label>
+              <input
+                name="username"
+                className="form-control"
+                value={formData.username}
+                onChange={handleChange}
+              />
+            </div>
 
             <div className="mb-3">
               <label className="form-label">Image</label>
@@ -114,11 +121,11 @@ function ListingForm({ addListing }) {
                 Save Changes
               </button>
             </div>
-
           </form>
         </div>
       </div>
-    </div>)
+    </div>
+  );
 }
 
-export default ListingForm
+export default ListingForm;

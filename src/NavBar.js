@@ -2,7 +2,6 @@ import React, { useContext } from "react";
 import { NavLink, Link } from "react-router-dom";
 // import userContext from "./userContext";
 
-
 import "./Navbar.css";
 
 /** NavBar component.
@@ -13,7 +12,6 @@ import "./Navbar.css";
  */
 //TODO: see if we can make NavLink active
 function NavBar() {
-
   // const { user } = useContext(userContext);
 
   function loggedInNav() {
@@ -49,6 +47,11 @@ function NavBar() {
         <li className="nav-item me-4">
           <NavLink className="nav-link" to="/signup">
             Sign Up
+          </NavLink>
+        </li>
+        <li className="nav-item me-4">
+          <NavLink className="nav-link" to="/listings/create">
+            Add a Listing
           </NavLink>
         </li>
       </ul>
