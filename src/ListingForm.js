@@ -12,7 +12,8 @@ function ListingForm({ addListing }) {
 
   async function handleSubmit(evt) {
     evt.preventDefault();
-    await addListing(formData);
+    console.log("formData= ", formData);
+    const newListing = await addListing(formData);
   }
 
   return (
@@ -24,9 +25,10 @@ function ListingForm({ addListing }) {
             <div className="mb-3">
               <label className="form-label">Title</label>
               <input
+                name="title"
                 className="form-control"
-                placeholder="Title"
-                value={formData.Title}
+                value={formData.title}
+                onChange={handleChange}
               />
             </div>
             <div className="mb-3">

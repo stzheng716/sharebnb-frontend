@@ -20,12 +20,12 @@ function App() {
     async function getListings() {
       const listings = await ShareBnBApi.getListings();
       setListings({ listing: listings, isLoaded: true });
-      console.log("ASDFASFDA");
     }
     getListings();
   }, []);
 
   async function addListing(formData) {
+    console.log("🚀 > addListing > formData=", formData);
     const form = new FormData();
     form.append("title", formData.title);
     form.append("details", formData.details);
@@ -35,8 +35,9 @@ function App() {
     form.append("zip", formData.zip);
     form.append("country", formData.country);
     form.append("price_per_night", formData.price_per_night);
-    form.append("image", formData.image);
+    form.append("files", formData.image);
     form.append("username", formData.username);
+    console.log("🚀 > addListing > form=", form);
 
     const options = {
       method: "POST",
@@ -49,6 +50,10 @@ function App() {
     };
 
     const res = await axios.request(options);
+    setListings({
+      listing: [...listings.listing, res.data.listing],
+      isLoaded: true,
+    });
     console.log("🚀 > addListing > res=", res);
 
     // setListings(curr => {})
