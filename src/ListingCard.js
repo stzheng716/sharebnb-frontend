@@ -15,16 +15,10 @@ function ListingCard({ listing }) {
   } = listing;
   return (
     <div>
-      <img src={image_url} alt={title}></img>
       <ul>
         <li>{title}</li>
-        <li>
-          {street} {zip} {city} {state} {country}
-        </li>
-        <li>{details}</li>
-        <li>{price_per_night}</li>
-        <li>{username}</li>
       </ul>
+      <img src={image_url} alt={title}></img>
     </div>
   );
 }

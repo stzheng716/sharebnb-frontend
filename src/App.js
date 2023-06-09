@@ -25,6 +25,13 @@ function App() {
     getListings();
   }, []);
 
+  useEffect(
+    function changeUser() {
+      getUser();
+    },
+    [token]
+  );
+
   async function addListing(formData) {
     const listing = await ShareBnBApi.postListing(formData);
     setListings((listings) => ({
@@ -32,13 +39,6 @@ function App() {
       isLoaded: true,
     }));
   }
-
-  useEffect(
-    function changeUser() {
-      getUser();
-    },
-    [token]
-  );
 
   async function getUser() {
     if (token) {
@@ -69,15 +69,14 @@ function App() {
     setToken("");
   }
 
-  async function search(name) {
-    console.log("🚀 > search > name=", name);
+  async function search(name = "") {
     let listings = await ShareBnBApi.getListings(name);
-    console.log("🚀 > search > listings=", listings);
     setListings({
       listing: listings,
       isLoaded: true,
     });
   }
+
 
   if (!listings.isLoaded) return <i>Loading...</i>;
 
@@ -85,7 +84,7 @@ function App() {
     <div className="App">
       <userContext.Provider value={currUser.user}>
         <BrowserRouter>
-          <NavBar handleLogout={handleLogout} />
+          <NavBar handleLogout={handleLogout} handleSearch={search} />
           <RoutesList
             listings={listings.listing}
             addListing={addListing}

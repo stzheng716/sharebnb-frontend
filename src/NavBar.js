@@ -11,7 +11,7 @@ import "./Navbar.css";
  * Renders links to home, companies, and jobs
  */
 //TODO: see if we can make NavLink active
-function NavBar({ handleLogout }) {
+function NavBar({ handleLogout, handleSearch }) {
   const user = useContext(userContext);
 
   function loggedInNav() {
@@ -56,7 +56,7 @@ function NavBar({ handleLogout }) {
   return (
     <nav className="Navigation navbar navbar-expand-md">
       <div className="container-fluid">
-        <Link className="navbar-brand" to="/">
+        <Link className="navbar-brand" to="/" onClick={() =>handleSearch()}>
           ShareBnB
         </Link>
         {user ? loggedInNav() : loggedOutNav()}

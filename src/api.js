@@ -32,7 +32,7 @@ class ShareBnBApi {
     try {
       return await axios({ url, method, data, params, headers });
     } catch (err) {
-      console.error("API Error:", err.response);
+      console.error("API Error:", err);
       // let message = err.response.data.error.message;
       // console.log(message);
       // throw Array.isArray(message) ? message : [message];
@@ -54,6 +54,7 @@ class ShareBnBApi {
   static async getListings(name) {
     console.log("🚀 > ShareBnBApi > getListings > name=", { q: name });
     let res = await this.request("listings", { q: name });
+    console.log("RES", res)
     return res.data.listings;
   }
 

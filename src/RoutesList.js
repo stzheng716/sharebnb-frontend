@@ -30,7 +30,7 @@ function RoutesList({
       <Routes>
         <Route
           path="/"
-          element={<Home listings={listings} handleSearch={handleSearch} />}
+          element={<Home listings={listings} handleSearch={handleSearch}  />}
         />
         <Route
           path="/listings/create"
