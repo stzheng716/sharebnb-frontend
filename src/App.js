@@ -25,8 +25,8 @@ function App() {
   }, []);
 
   async function addListing(formData) {
-    console.log("🚀 > addListing > formData=", formData);
-    const form = new FormData();
+    console.log("🚀 > addListing > formData=", formData.title);
+    let form = new FormData();
     form.append("title", formData.title);
     form.append("details", formData.details);
     form.append("street", formData.street);
@@ -35,7 +35,7 @@ function App() {
     form.append("zip", formData.zip);
     form.append("country", formData.country);
     form.append("price_per_night", formData.price_per_night);
-    form.append("files", formData.image);
+    form.append("image", formData.image);
     form.append("username", formData.username);
     console.log("🚀 > addListing > form=", form);
 
@@ -43,10 +43,9 @@ function App() {
       method: "POST",
       url: "http://localhost:5001/listings",
       headers: {
-        "Content-Type":
-          "multipart/form-data; boundary=---011000010111000001101001",
+        "Content-Type": "multipart/form-data"
       },
-      data: form,
+      data: form
     };
 
     const res = await axios.request(options);

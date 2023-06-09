@@ -4,10 +4,17 @@ function ListingForm({ addListing }) {
 
   function handleChange(evt) {
     const input = evt.target;
-    setFormData((formData) => ({
-      ...formData,
-      [input.name]: input.value,
-    }));
+    if (input.type === 'file') {
+      setFormData((formData) => ({
+        ...formData,
+        [input.name]: input.files[0],
+      }));
+    } else {
+      setFormData((formData) => ({
+        ...formData,
+        [input.name]: input.value,
+      }));
+    }
   }
 
   async function handleSubmit(evt) {
