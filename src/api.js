@@ -44,43 +44,42 @@ class ShareBnBApi {
 
   static async getListings() {
     let res = await this.request("listings");
-    console.log("🚀 > ShareBnBApi > getListings > res.listings=", res.listings);
-    return res.listings;
+    return res.data.listings;
   }
 
   /** Get details on a listing by id. */
 
   static async getListing(id) {
     let res = await this.request(`listings/${id}`);
-    return res.listing;
+    return res.data.listing;
   }
 
   /** Post a listing. */
 
   static async postListing(data) {
     let res = await this.request(`listings`, data, "post");
-    return res.listing;
+    return res.data.listing;
   }
 
   /** Get token for login from username, password. */
 
   static async login(data) {
     let res = await this.request(`auth/login`, data, "post");
-    return res.token;
+    return res.data.token;
   }
 
   /** Signup for site. */
 
   static async signup(data) {
     let res = await this.request(`auth/signup`, data, "post");
-    return res.token;
+    return res.data.token;
   }
 
   /** Save user profile page. */
 
   static async saveProfile(username, data) {
     let res = await this.request(`users/${username}`, data, "patch");
-    return res.user;
+    return res.data.user;
   }
 }
 

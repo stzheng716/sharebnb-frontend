@@ -17,6 +17,7 @@ function RoutesList({
   handleLogIn,
   handleSignUp,
   handleUpdate,
+  addListing,
   error,
   listings,
 }) {
@@ -27,7 +28,7 @@ function RoutesList({
     return (
       <Routes>
         <Route path="/" element={<Home listings={listings} />} />
-        <Route path="/listings/create" element={<ListingForm />} />
+        <Route path="/listings/create" element={<ListingForm addListing={addListing}/>} />
         <Route path="/listings/:id" element={<ListingDetail />} />
         {/* <Route
           path="/users/username"

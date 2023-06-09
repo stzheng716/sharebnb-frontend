@@ -9,36 +9,28 @@ import axios from "axios";
 const API_URL = "http://localhost:5001";
 
 function App() {
-  const [listings, setListings] = useState(null);
+  const [listings, setListings] = useState({ listing: null, isLoaded: false });
 
   // const [currUser, setCurrUser] = useState({ user: null, isLoaded: false });
   // const [token, setToken] = useState(
   //   localStorage.getItem(LOCAL_STORAGE_TOKEN_KEY)
   // );
 
-  async function getListings() {
-    const options = { method: "GET", url: "http://localhost:5001/listings" };
+  useEffect(
+    function getListingsOnMount() {
+      async function getListings() {
+        const listings = await ShareBnBApi.getListings();
+        setListings({ listing: listings, isLoaded: true});
+        console.log("ASDFASFDA")
+      }
+      getListings();
+    },
+    [ ]
+  );
 
-    const listings = await axios.request(options);
-    // const listings = await axios.get(`${API_URL}/listings`);
-    setListings(listings);
+  async function addListing(formData) {
+    const res = await ShareBnBApi.postListing(formData)
   }
-  getListings();
-  console.log("🚀 > listings=", listings);
-
-  // useEffect(
-  //   function getListingsOnMount() {
-  //     console.log("here");
-  //     async function getListings() {
-  //       console.log("hit here");
-  //       const listings = await ShareBnBApi.getListings();
-  //       setListings(listings);
-  //     }
-  //     getListings();
-  //   },
-  //   [listings]
-  // );
-
   // async function getUser() {
   //   if (token) {
   //     ShareBnBApi.token = token;
@@ -80,7 +72,7 @@ function App() {
     // setToken("");
   }
 
-  // if (!currUser.isLoaded) return <i>Loading...</i>;
+  if (!listings.isLoaded) return <i>Loading...</i>;
 
   return (
     <div className="App">
@@ -88,7 +80,8 @@ function App() {
       <BrowserRouter>
         <NavBar handleLogout={handleLogout} />
         <RoutesList
-          listings={listings}
+          listings={listings.listing}
+          addListing = {addListing}
           // handleLogIn={handleLogIn}
           // handleSignUp={handleSignUp}
           // handleUpdate={handleUpdate}

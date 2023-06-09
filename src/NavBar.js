@@ -3,7 +3,7 @@ import { NavLink, Link } from "react-router-dom";
 // import userContext from "./userContext";
 
 
-// import "./Navbar.css";
+import "./Navbar.css";
 
 /** NavBar component.
  *
@@ -61,7 +61,7 @@ function NavBar() {
         <Link className="navbar-brand" to="/">
           ShareBnB
         </Link>
-        {true ? loggedInNav() : loggedOutNav()}
+        {false ? loggedInNav() : loggedOutNav()}
       </div>
     </nav>
   );

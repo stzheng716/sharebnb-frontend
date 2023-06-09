@@ -10,6 +10,7 @@ import ListingCard from "./ListingCard";
  */
 
 function Home({ listings }) {
+    console.log("HOMELISTING", listings)
   //   const user = useContext(userContext);
   //   const navigate = useNavigate();
 
