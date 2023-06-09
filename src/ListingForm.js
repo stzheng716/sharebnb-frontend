@@ -19,7 +19,6 @@ function ListingForm({ addListing }) {
 
   async function handleSubmit(evt) {
     evt.preventDefault();
-    console.log("formData= ", formData);
     const newListing = await addListing(formData);
   }
 

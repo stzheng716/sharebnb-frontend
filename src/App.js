@@ -24,39 +24,16 @@ function App() {
     getListings();
   }, []);
 
+
   async function addListing(formData) {
-    console.log("🚀 > addListing > formData=", formData.title);
-    let form = new FormData();
-    form.append("title", formData.title);
-    form.append("details", formData.details);
-    form.append("street", formData.street);
-    form.append("city", formData.city);
-    form.append("state", formData.state);
-    form.append("zip", formData.zip);
-    form.append("country", formData.country);
-    form.append("price_per_night", formData.price_per_night);
-    form.append("image", formData.image);
-    form.append("username", formData.username);
-    console.log("🚀 > addListing > form=", form);
-
-    const options = {
-      method: "POST",
-      url: "http://localhost:5001/listings",
-      headers: {
-        "Content-Type": "multipart/form-data"
-      },
-      data: form
-    };
-
-    const res = await axios.request(options);
-    setListings({
-      listing: [...listings.listing, res.data.listing],
+    const listing = await ShareBnBApi.postListing(formData);
+    setListings(listings => ({
+      listing: [...listings.listing, listing],
       isLoaded: true,
-    });
-    console.log("🚀 > addListing > res=", res);
-
-    // setListings(curr => {})
+    }));
   }
+
+
   // async function getUser() {  //   if (token) {
   //     ShareBnBApi.token = token;
   //     const { username } = jwt_decode(token);
@@ -107,9 +84,9 @@ function App() {
         <RoutesList
           listings={listings.listing}
           addListing={addListing}
-          // handleLogIn={handleLogIn}
-          // handleSignUp={handleSignUp}
-          // handleUpdate={handleUpdate}
+        // handleLogIn={handleLogIn}
+        // handleSignUp={handleSignUp}
+        // handleUpdate={handleUpdate}
         />
       </BrowserRouter>
       {/* </userContext.Provider> */}

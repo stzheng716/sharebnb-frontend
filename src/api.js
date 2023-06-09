@@ -20,6 +20,7 @@ class ShareBnBApi {
     const url = `${BASE_URL}/${endpoint}`;
     const headers = {
       Authorization: `Bearer ${ShareBnBApi.token}`,
+      "Content-Type": "multipart/form-data"
     };
     const params = method === "get" ? data : {};
 
@@ -60,10 +61,22 @@ class ShareBnBApi {
 
   /** Post a listing. */
 
-  static async postListing(data) {
-    console.log("🚀 > ShareBnBApi > postListing > data=", data);
+  static async postListing(formData) {
+    console.log(formData)
+    const form = new FormData();
+    form.append("title", formData.title);
+    form.append("details", formData.details);
+    form.append("street", formData.street);
+    form.append("city", formData.city);
+    form.append("state", formData.state);
+    form.append("zip", formData.zip);
+    form.append("country", formData.country);
+    form.append("price_per_night", formData.price_per_night);
+    form.append("image", formData.image);
+    form.append("username", formData.username);
 
-    let res = await this.request(`listings`, data, "post");
+
+    let res = await this.request(`listings`, form, "post");
     return res.data.listing;
   }
 
