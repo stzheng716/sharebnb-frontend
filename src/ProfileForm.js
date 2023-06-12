@@ -3,6 +3,8 @@ import { Alert, Button, Card } from "react-bootstrap";
 import Notice from "./Notice";
 import userContext from "./userContext";
 import ListingList from "./ListingList";
+import MessageList from "./MessageList";
+import BookingList from "./BookingList";
 
 function ProfileForm({ handleUpdate }) {
 
@@ -45,23 +47,23 @@ function ProfileForm({ handleUpdate }) {
     setFormData((formData) => ({ ...formData }));
   }
 
-  function showMessage() {
-    return (
-      <Card>
-        <h3>Message Sent</h3>
-        <div>
-          {user.sent_message.map(message =>
-            <Card>
-              <Card.Body>
-                Message: {message.body}
-                Sent_at: {message.sent_at_date}
-                Message ID: {message.id}
-              </Card.Body>
-            </Card>)}
-        </div>
-      </Card>
-    )
-  }
+  // function showMessage() {
+  //   return (
+  //     <Card>
+  //       <h3>Message Sent</h3>
+  //       <div>
+  //         {user.sent_message.map(message =>
+  //           <Card>
+  //             <Card.Body>
+  //               Message: {message.body}
+  //               Sent_at: {message.sent_at_date}
+  //               Message ID: {message.id}
+  //             </Card.Body>
+  //           </Card>)}
+  //       </div>
+  //     </Card>
+  //   )
+  // }
 
   function showListing() {
     return (
@@ -142,7 +144,8 @@ function ProfileForm({ handleUpdate }) {
           </Button>
         </form>
       </Card>
-      {user.sent_message && showMessage()}
+      {user.sent_messages && <MessageList messages={user.sent_messages} type="sent"/>}
+      {user.bookings && <BookingList bookings={user.bookings}/>}
       {user.listings && showListing()}
     </div>
   );

@@ -58,10 +58,12 @@ function NavBar({ handleLogout, handleSearch }) {
         <Navbar.Brand
           className="navbar-brand"
           href="/"
-          onClick={() => handleSearch()}
-        >
+          onClick={() => handleSearch()}>
           ShareBnB
         </Navbar.Brand>
+        <NavLink className="nav-link m-2" to="/map">
+          Map Listings
+        </NavLink>
         {user ? loggedInNav() : loggedOutNav()}
       </Container>
     </Navbar>

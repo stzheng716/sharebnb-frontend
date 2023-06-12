@@ -7,6 +7,7 @@ import LogInForm from "./LogInForm";
 import SignUpForm from "./SignUpForm";
 import userContext from "./userContext";
 import ProfileForm from "./ProfileForm.js";
+import MapBox from "./MapBox.js";
 
 /** RouteList component.
  *
@@ -36,6 +37,10 @@ function RoutesList({
           element={<Home listings={listings} handleSearch={handleSearch} />}
         />
         <Route
+          path="/map"
+          element={<MapBox listings={listings} />}
+        />
+        <Route
           path="/listings/create"
           element={<ListingForm addListing={addListing} />}
         />
@@ -58,6 +63,10 @@ function RoutesList({
         <Route
           path="/"
           element={<Home listings={listings} handleSearch={handleSearch} />}
+        />
+        <Route
+          path="/map"
+          element={<MapBox listings={listings} />}
         />
         <Route
           path="/login"

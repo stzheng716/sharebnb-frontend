@@ -41,7 +41,7 @@ function ListingForm({ addListing }) {
                 className="form-control"
                 value={formData.title}
                 onChange={handleChange}
-                maxlength="40"
+                maxLength="40"
                 placeholder="title"
                 required
               />
@@ -65,7 +65,7 @@ function ListingForm({ addListing }) {
                 value={formData.street}
                 onChange={handleChange}
                 placeholder="street"
-                maxlength="50"
+                maxLength="50"
                 required
               />
             </div>
@@ -77,7 +77,7 @@ function ListingForm({ addListing }) {
                 value={formData.city}
                 onChange={handleChange}
                 placeholder="city"
-                maxlength="30"
+                maxLength="30"
                 required
               />
             </div>
@@ -90,7 +90,7 @@ function ListingForm({ addListing }) {
                 value={formData.state}
                 onChange={handleChange}
                 placeholder="CA"
-                maxlength="2"
+                maxLength="2"
                 required
               />
             </div>
@@ -103,7 +103,7 @@ function ListingForm({ addListing }) {
                 value={formData.zip}
                 onChange={handleChange}
                 placeholder="91384"
-                maxlength="5"
+                maxLength="5"
                 required
               />
             </div>
@@ -116,7 +116,7 @@ function ListingForm({ addListing }) {
                 value={formData.country}
                 onChange={handleChange}
                 placeholder="USA"
-                maxlength="3"
+                maxLength="3"
                 required
               />
             </div>
