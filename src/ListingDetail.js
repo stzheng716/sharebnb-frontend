@@ -55,7 +55,7 @@ function ListingDetail({ handleMessage, handleBooking }) {
             handleMessage={handleMessage} />
 
           <BookingForm listing={listing}
-            handleMessage={handleMessage} />
+            handleBooking={handleBooking} />
         </div>
       }
       {user.username === listing.username && listing.messages.map(message =>

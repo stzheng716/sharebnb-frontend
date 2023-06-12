@@ -6,7 +6,8 @@ function BookingForm({ listing, handleBooking }) {
   const user = useContext(userContext);
 
   const [formData, setFormData] = useState({
-
+    check_in_date: "",
+    check_out_date: ""
   });
 
   function handleChange(evt) {
@@ -19,9 +20,10 @@ function BookingForm({ listing, handleBooking }) {
 
   async function handleSubmit(evt) {
     evt.preventDefault();
-    formData.from_username = user.username
+    formData.username = user.username
     formData.property_id = listing.id
     formData.booking_price_per_night = listing.price_per_night
+    console.log(formData)
     await handleBooking(formData);
     setFormData((formData) => ({ ...formData }));
   }
