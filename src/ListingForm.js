@@ -21,7 +21,6 @@ function ListingForm({ addListing }) {
       }));
     }
   }
-  console.log("formData", formData);
 
   async function handleSubmit(evt) {
     evt.preventDefault();

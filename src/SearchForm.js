@@ -31,8 +31,8 @@ function SearchForm({ handleSearch }) {
 
   return (
     <Form onSubmit={handleSubmit}>
-      <Form.Group className="justify-content-center justify-content-lg-start gx-0">
-        <div className="d-flex align-items-center col-10 justify-content-center ">
+      <Form.Group className="d-flex justify-content-center gx-0">
+        <div className="d-flex col-3">
           <input
             className="form-control form-control-lg me-2"
             name="q"

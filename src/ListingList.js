@@ -10,7 +10,7 @@ import SearchForm from "./SearchForm";
  * Renders home page with background
  */
 
-function ListingList({ listings, handleSearch }) {
+function ListingList({ listings }) {
   //   const user = useContext(userContext);
   //   const navigate = useNavigate();
 
@@ -21,14 +21,12 @@ function ListingList({ listings, handleSearch }) {
   //     navigate("/signup");
   //   }
 
-  console.log("🚀 > ListingList > listings=", listings);
   return (
     <div className="background">
-      <div>
-        <h1 className="displayText">ShareBnB!</h1>
-      </div>
-      <SearchForm handleSearch={handleSearch} />
-      {listings && listings.map((l) => <ListingCard key={l.id} listing={l} />)}
+      {listings &&
+        listings.map((l) => (
+          <ListingCard key={l.id} listing={l} />
+        ))}
     </div>
   );
 }

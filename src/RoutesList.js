@@ -6,6 +6,7 @@ import ListingForm from "./ListingForm";
 import LogInForm from "./LogInForm";
 import SignUpForm from "./SignUpForm";
 import userContext from "./userContext";
+import ProfileForm from "./ProfileForm.js";
 
 /** RouteList component.
  *
@@ -22,6 +23,8 @@ function RoutesList({
   error,
   listings,
   handleSearch,
+  handleMessage,
+  handleBooking
 }) {
   const user = useContext(userContext);
 
@@ -30,17 +33,22 @@ function RoutesList({
       <Routes>
         <Route
           path="/"
-          element={<Home listings={listings} handleSearch={handleSearch}  />}
+          element={<Home listings={listings} handleSearch={handleSearch} />}
         />
         <Route
           path="/listings/create"
           element={<ListingForm addListing={addListing} />}
         />
-        <Route path="/listings/:id" element={<ListingDetail />} />
-        {/* <Route
-          path="/users/username"
-          element={<ProfileForm handleUpdate={handleUpdate} error={error} />}
-        /> */}
+        <Route path="/listings/:id" element={
+          <ListingDetail
+            handleMessage={handleMessage}
+            handleBooking={handleBooking}
+          />}
+        />
+        <Route
+          path="/users/:username"
+          element={<ProfileForm handleUpdate={handleUpdate} />}
+        />
         <Route path="*" element={<Navigate to="/" />} />
       </Routes>
     );

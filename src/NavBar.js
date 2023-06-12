@@ -22,12 +22,15 @@ function NavBar({ handleLogout, handleSearch }) {
   function loggedInNav() {
     return (
       <Navbar bg="light" expand="lg" variant="light">
-        <Container>
-          <NavLink className="nav-link" to="/listings/create">
+        <Container className="m-2">
+          <NavLink className="nav-link m-2" to="/listings/create">
             Create Listing
           </NavLink>
-          <NavLink className="nav-link" to="/" onClick={handleLogout}>
+          <NavLink className="nav-link m-2" to="/" onClick={handleLogout}>
             Log out
+          </NavLink>
+          <NavLink className="nav-link m-2" to={`/users/${user.username}`}>
+            User Profile
           </NavLink>
         </Container>
       </Navbar>
@@ -38,10 +41,10 @@ function NavBar({ handleLogout, handleSearch }) {
     return (
       <Navbar bg="light" expand="lg" variant="light">
         <Container>
-          <NavLink className="nav-link" to="/login">
+          <NavLink className="nav-link m-2" to="/login">
             Login
           </NavLink>
-          <NavLink className="nav-link" to="/signup">
+          <NavLink className="nav-link m-2" to="/signup">
             Sign Up
           </NavLink>
         </Container>

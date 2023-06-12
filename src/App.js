@@ -55,7 +55,6 @@ function App() {
 
   async function handleLogIn(formData) {
     const token = await ShareBnBApi.login(formData);
-    localStorage.setItem(LOCAL_STORAGE_TOKEN_KEY, token);
     setToken(token);
   }
 
@@ -70,12 +69,27 @@ function App() {
   }
 
   async function search(name = "") {
-    let listings = await ShareBnBApi.getListings(name);
+    const listings = await ShareBnBApi.getListings(name);
     setListings({
       listing: listings,
       isLoaded: true,
     });
   }
+
+  async function handleUpdateProfile(formData){
+    const username = currUser.user.username
+    const updatedUser = await ShareBnBApi.updateProfile(username, formData)
+    setCurrUser({ user: updatedUser, isLoaded: true });
+  }
+
+  async function handleMessage(formData){
+    await ShareBnBApi.messageListing(formData)
+  }
+
+  async function handleBooking(formData){
+    await ShareBnBApi.bookProperty(formData)
+  }
+
 
 
   if (!listings.isLoaded) return <i>Loading...</i>;
@@ -91,6 +105,9 @@ function App() {
             handleLogIn={handleLogIn}
             handleSignUp={signup}
             handleSearch={search}
+            handleUpdate={handleUpdateProfile}
+            handleMessage={handleMessage}
+            handleBooking={handleBooking}
           />
         </BrowserRouter>
       </userContext.Provider>

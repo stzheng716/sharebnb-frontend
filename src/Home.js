@@ -4,6 +4,7 @@ import ListingCard from "./ListingCard";
 import ShareBnBApi from "./api";
 import SearchForm from "./SearchForm";
 import "./Home.css";
+import ListingList from "./ListingList";
 /** Home component.
  *
  * RouteList -> Home
@@ -27,15 +28,7 @@ function Home({ listings, handleSearch }) {
       <div>
         <SearchForm handleSearch={handleSearch} />
         <h1 className="displayText">Find Your Dream In Nature</h1>
-      </div>
-      <div>
-        {listings &&
-          listings.map((l) => (
-            <Link to={`/listings/${l.id}`}>
-              {" "}
-              <ListingCard key={l.id} listing={l} />
-            </Link>
-          ))}
+        <ListingList listings={listings}/>
       </div>
     </div>
   );

@@ -33,9 +33,9 @@ class ShareBnBApi {
       return await axios({ url, method, data, params, headers });
     } catch (err) {
       console.error("API Error:", err);
-      // let message = err.response.data.error.message;
-      // console.log(message);
-      // throw Array.isArray(message) ? message : [message];
+      let message = err.response.data.error.message;
+      console.log(message);
+      throw Array.isArray(message) ? message : [message];
     }
   }
 
@@ -96,14 +96,24 @@ class ShareBnBApi {
   /** Signup for site. */
 
   static async signup(data) {
-    let res = await this.request(`auth/signup`, data, "post");
+    const res = await this.request(`auth/signup`, data, "post");
     return res.data.token;
   }
 
   /** Save user profile page. */
 
-  static async saveProfile(username, data) {
-    let res = await this.request(`users/${username}`, data, "patch");
+  static async updateProfile(username, data) {
+    const res = await this.request(`users/${username}`, data, "patch");
+    return res.data.user;
+  }
+
+  static async messageListing(data) {
+    const res = await this.request(`messages`, data, "post");
+    return res.data.user;
+  }
+
+  static async bookProperty(data) {
+    const res = await this.request(`bookings`, data, "post");
     return res.data.user;
   }
 }

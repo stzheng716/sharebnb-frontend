@@ -1,18 +1,21 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import ShareBnBApi from "./api";
 import { useParams } from "react-router-dom";
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
+import MessageForm from "./MessageForm";
+import userContext from "./userContext";
+import BookingForm from "./BookingForm";
 
-function ListingDetail() {
+function ListingDetail({ handleMessage, handleBooking }) {
   const { id } = useParams();
+  const user = useContext(userContext);
 
   const [listing, setListing] = useState(null);
 
   useEffect(function loadCompaniesFromAPI() {
     async function fetchCompany() {
       const response = await ShareBnBApi.getListing(id);
-      console.log("RESPONSE", response);
       setListing(response);
     }
     fetchCompany();
@@ -46,7 +49,25 @@ function ListingDetail() {
       <Button variant="primary" href="/">
         Back to All Listings
       </Button>
+      {user.username !== listing.username &&
+        <div>
+          <MessageForm listing={listing}
+            handleMessage={handleMessage} />
+
+          <BookingForm listing={listing}
+            handleMessage={handleMessage} />
+        </div>
+      }
+      {user.username === listing.username && listing.messages.map(message =>
+        <div>
+          <h4>Questions from {message.from_user}</h4>
+          <div>
+            <p>question: {message.body}</p>
+          </div>
+        </div>
+      )}
     </Card>
+
   );
 }
 
