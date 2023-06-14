@@ -24,6 +24,7 @@ function ListingForm({ addListing }) {
 
   async function handleSubmit(evt) {
     evt.preventDefault();
+    formData.username = user.username
     const newListing = await addListing(formData);
     navigate("/");
   }
@@ -132,18 +133,6 @@ function ListingForm({ addListing }) {
                 required
               />
             </div>
-            <div className="mb-3">
-              <label className="form-label">Username</label>
-              <input
-                name="username"
-                className="form-control"
-                value={formData.username}
-                onChange={handleChange}
-                placeholder={user.username}
-                required
-              />
-            </div>
-
             <div className="mb-3">
               <label className="form-label">Image</label>
               <input
