@@ -7,7 +7,7 @@ import ShareBnBApi from "./api";
 import NavBar from "./NavBar";
 import jwt_decode from "jwt-decode";
 
-const LOCAL_STORAGE_TOKEN_KEY = "token";
+const LOCAL_STORAGE_TOKEN_KEY = "shareBnB-token";
 
 function App() {
   const [listings, setListings] = useState({ listing: null, isLoaded: false });
@@ -89,10 +89,8 @@ function App() {
   async function handleBooking(formData){
     await ShareBnBApi.bookProperty(formData)
   }
-
-
-
-  if (!listings.isLoaded) return <i>Loading...</i>;
+  
+  if (!listings.isLoaded || !currUser.isLoaded) return <i>Loading...</i>;
 
   return (
     <div className="App">

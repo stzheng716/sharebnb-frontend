@@ -1,11 +1,11 @@
 import React, { useContext } from "react";
-import { NavLink, Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import userContext from "./userContext";
 
 import Container from "react-bootstrap/Container";
-import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
-import { Button } from "react-bootstrap";
+import Nav from 'react-bootstrap/Nav';
+import Button from 'react-bootstrap/Button';
 
 import "./Navbar.css";
 
@@ -16,22 +16,23 @@ import "./Navbar.css";
  * Renders links to home, companies, and jobs
  */
 //TODO: see if we can make NavLink active
-function NavBar({ handleLogout, handleSearch }) {
+function NavBar({ handleLogout }) {
   const user = useContext(userContext);
+  console.log("users", user)
 
   function loggedInNav() {
     return (
       <Navbar bg="light" expand="lg" variant="light">
         <Container className="m-2">
-          <NavLink className="nav-link m-2" to="/listings/create">
-            Create Listing
-          </NavLink>
-          <NavLink className="nav-link m-2" to="/" onClick={handleLogout}>
-            Log out
-          </NavLink>
-          <NavLink className="nav-link m-2" to={`/users/${user.username}`}>
+          <Nav.Link className="nav-link m-2" href="/listings/create">
+            Create Listing <i className='bx bx-location-plus' ></i>
+          </Nav.Link>
+          <Nav.Link className="nav-link m-2" href={`/users/${user.username}`}>
             User Profile
-          </NavLink>
+          </Nav.Link>
+          <Button className="nav-link m-2" href="/" onClick={handleLogout}>
+            Log out of {user.username}
+          </Button>
         </Container>
       </Navbar>
     );
@@ -41,12 +42,12 @@ function NavBar({ handleLogout, handleSearch }) {
     return (
       <Navbar bg="light" expand="lg" variant="light">
         <Container>
-          <NavLink className="nav-link m-2" to="/login">
+          <Nav.Link className="nav-link m-2" href="/login">
             Login
-          </NavLink>
-          <NavLink className="nav-link m-2" to="/signup">
+          </Nav.Link>
+          <Nav.Link className="nav-link m-2" href="/signup">
             Sign Up
-          </NavLink>
+          </Nav.Link>
         </Container>
       </Navbar>
     );
@@ -56,15 +57,16 @@ function NavBar({ handleLogout, handleSearch }) {
     <Navbar bg="light" expand="lg" variant="light">
       <Container>
         <Navbar.Brand
-          className="navbar-brand"
           href="/"
-          onClick={() => handleSearch()}>
-          ShareBnB
+          className="displayText">
+          ShareBnB <i className='bx bx-home' ></i>
         </Navbar.Brand>
-        <NavLink className="nav-link m-2" to="/map">
-          Map Listings
-        </NavLink>
-        {user ? loggedInNav() : loggedOutNav()}
+        <Navbar.Collapse id="basic-navbar-nav" className="justify-content-end">
+          <Nav.Link className="nav-link m-2" href="/map">
+            Map Listings <i className='bx bx-map' ></i>
+          </Nav.Link>
+          {user ? loggedInNav() : loggedOutNav()}
+        </Navbar.Collapse>
       </Container>
     </Navbar>
   );

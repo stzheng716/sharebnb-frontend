@@ -1,8 +1,8 @@
 import React, { useContext } from "react";
-import { useNavigate } from "react-router-dom";
 import ListingCard from "./ListingCard";
-import ShareBnBApi from "./api";
-import SearchForm from "./SearchForm";
+import Col from "react-bootstrap/Col";
+import Row from "react-bootstrap/Row";
+
 /** Home component.
  *
  * RouteList -> Home
@@ -23,10 +23,14 @@ function ListingList({ listings }) {
 
   return (
     <div className="background">
-      {listings &&
-        listings.map((l) => (
-          <ListingCard key={l.id} listing={l} />
-        ))}
+      <Row xs={1} md={3} lg={4} className="g-4 m-2 p-2">
+        {listings &&
+          listings.map((l) => (
+            <Col key={`c-${l.id}`}>
+              <ListingCard key={l.id} listing={l} />
+            </Col>
+          ))}
+      </Row>
     </div>
   );
 }

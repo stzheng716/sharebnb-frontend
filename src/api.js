@@ -34,7 +34,6 @@ class ShareBnBApi {
     } catch (err) {
       console.error("API Error:", err);
       let message = err.response.data.error.message;
-      console.log(message);
       throw Array.isArray(message) ? message : [message];
     }
   }
@@ -52,9 +51,7 @@ class ShareBnBApi {
   //TODO: add filtering route in backend
 
   static async getListings(name) {
-    console.log("🚀 > ShareBnBApi > getListings > name=", { q: name });
     let res = await this.request("listings", { q: name });
-    console.log("RES", res)
     return res.data.listings;
   }
 
@@ -62,6 +59,7 @@ class ShareBnBApi {
 
   static async getListing(id) {
     let res = await this.request(`listings/${id}`);
+    console.log("RESPONSE FOR A LISTING", res)
     return res.data.listing;
   }
 

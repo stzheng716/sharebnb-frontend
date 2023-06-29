@@ -30,7 +30,7 @@ function SearchForm({ handleSearch }) {
   }
 
   return (
-    <Form onSubmit={handleSubmit}>
+    <Form onSubmit={handleSubmit} className="mt-2">
       <Form.Group className="d-flex justify-content-center gx-0">
         <div className="d-flex col-3">
           <input

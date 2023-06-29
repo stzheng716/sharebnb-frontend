@@ -27,7 +27,7 @@ function Home({ listings, handleSearch }) {
     <div className="background">
       <div>
         <SearchForm handleSearch={handleSearch} />
-        <h1 className="displayText">Find Your Dream In Nature</h1>
+        <h1 className="displayText">"Discover Your Perfect Escape"</h1>
         <ListingList listings={listings}/>
       </div>
     </div>

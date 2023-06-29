@@ -1,7 +1,6 @@
 import { useMemo, useState } from 'react';
 import Map, { Marker } from 'react-map-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
-//add the css sheet for it to work
 
 const token = process.env.REACT_APP_MAPBOXTOKEN;
 function MapBox({ listings }) {
@@ -31,7 +30,7 @@ function MapBox({ listings }) {
 				}}
 				height="100%"
 				style={{ width: "100vw", height: "100vh" }}
-				mapStyle="mapbox://styles/mapbox/streets-v9"
+				mapStyle="mapbox://styles/mapbox/navigation-night-v1"
 			>
 				{pin}
 			</Map>

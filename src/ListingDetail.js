@@ -8,21 +8,29 @@ import userContext from "./userContext";
 import BookingForm from "./BookingForm";
 import MessageList from "./MessageList";
 import BookingList from "./BookingList";
+import Alert from "./Alert";
 
 function ListingDetail({ handleMessage, handleBooking }) {
   const { id } = useParams();
+
   const user = useContext(userContext);
 
   const [listing, setListing] = useState(null);
+  const [errors, setError] = useState([]);
 
   useEffect(function loadCompaniesFromAPI() {
-    async function fetchCompany() {
-      const response = await ShareBnBApi.getListing(id);
-      setListing(response);
+    async function fetchListing() {
+      try {
+        const response = await ShareBnBApi.getListing(id);
+        setListing(response);
+      } catch (err) {
+        setError(err);
+      }
     }
-    fetchCompany();
-  }, []);
+    fetchListing();
+  }, [id]);
 
+  if (errors.length) return <Alert type="danger" messages={errors} />
   if (!listing) return <i>Loading...</i>;
 
   return (

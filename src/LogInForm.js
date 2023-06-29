@@ -42,7 +42,7 @@ function LogInForm({ handleLogIn }) {
       <Card style={{ width: '400px', padding: '20px', textAlign: "left" }}>
         <h2>Log In</h2>
         <form className="LogInForm" onSubmit={handleSubmit}>
-          {error && error.map((e, i) => <Notice key={i} message={e} type="danger" />)}
+          {error && <Notice message={error} type="danger" />}
           <div>
             <label htmlFor="username">Username</label>
             <input
@@ -70,7 +70,7 @@ function LogInForm({ handleLogIn }) {
             />
           </div>
 
-          <Button variant="primary" type="submit">
+          <Button variant="primary" type="submit" className="mt-2">
             Log In
           </Button>
         </form>
