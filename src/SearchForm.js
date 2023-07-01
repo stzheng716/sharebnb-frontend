@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { Button, Form, Row } from "react-bootstrap";
+import { Form } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
 
 /** Search widget.
  *
@@ -15,6 +16,7 @@ import { Button, Form, Row } from "react-bootstrap";
 
 function SearchForm({ handleSearch }) {
   const [searchTerm, setSearchTerm] = useState("");
+  const navigate = useNavigate();
 
   /** Tell parent to filter */
   function handleSubmit(evt) {
@@ -22,6 +24,7 @@ function SearchForm({ handleSearch }) {
     evt.preventDefault();
     handleSearch(searchTerm.trim() || undefined);
     setSearchTerm(searchTerm.trim());
+    navigate("/");
   }
 
   /** Update form fields */
@@ -30,21 +33,18 @@ function SearchForm({ handleSearch }) {
   }
 
   return (
-    <Form onSubmit={handleSubmit} className="mt-2">
-      <Form.Group className="d-flex justify-content-center gx-0">
-        <div className="d-flex col-3">
-          <input
-            className="form-control form-control-lg me-2"
-            name="q"
-            placeholder="Enter search term.."
-            value={searchTerm}
-            onChange={handleChange}
-          />
-          <button type="submit" className="btn btn-lg btn-primary">
-            Submit
-          </button>
-        </div>
-      </Form.Group>
+    <Form onSubmit={handleSubmit} className="mt-2 d-flex">
+      <Form.Control
+        className="justify-content-center gx-0 m-1"
+        name="q"
+        placeholder="Enter search term.."
+        type="search"
+        value={searchTerm}
+        onChange={handleChange}
+      />
+      <button type="submit" className="btn btn-lg btn-primary">
+        <i className='bx bx-search'></i>
+      </button>
     </Form>
   );
 }

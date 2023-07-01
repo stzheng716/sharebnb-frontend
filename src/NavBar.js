@@ -8,6 +8,7 @@ import Nav from 'react-bootstrap/Nav';
 import Button from 'react-bootstrap/Button';
 
 import "./Navbar.css";
+import SearchForm from "./SearchForm";
 
 /** NavBar component.
  *
@@ -16,7 +17,7 @@ import "./Navbar.css";
  * Renders links to home, companies, and jobs
  */
 //TODO: see if we can make NavLink active
-function NavBar({ handleLogout }) {
+function NavBar({ handleLogout, handleSearch }) {
   const user = useContext(userContext);
   console.log("users", user)
 
@@ -30,7 +31,7 @@ function NavBar({ handleLogout }) {
           <Nav.Link className="nav-link m-2" href={`/users/${user.username}`}>
             User Profile
           </Nav.Link>
-          <Button className="nav-link m-2" href="/" onClick={handleLogout}>
+          <Button variant="primary" href="/" onClick={handleLogout}>
             Log out of {user.username}
           </Button>
         </Container>
@@ -62,6 +63,7 @@ function NavBar({ handleLogout }) {
           ShareBnB <i className='bx bx-home' ></i>
         </Navbar.Brand>
         <Navbar.Collapse id="basic-navbar-nav" className="justify-content-end">
+          <SearchForm  handleSearch={handleSearch}/>
           <Nav.Link className="nav-link m-2" href="/map">
             Map Listings <i className='bx bx-map' ></i>
           </Nav.Link>

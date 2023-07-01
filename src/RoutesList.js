@@ -21,7 +21,6 @@ function RoutesList({
   handleSignUp,
   handleUpdate,
   addListing,
-  error,
   listings,
   handleSearch,
   handleMessage,
@@ -62,7 +61,7 @@ function RoutesList({
       <Routes>
         <Route
           path="/"
-          element={<Home listings={listings} handleSearch={handleSearch} />}
+          element={<Home listings={listings} />}
         />
         <Route
           path="/map"

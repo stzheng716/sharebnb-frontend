@@ -102,7 +102,6 @@ function App() {
             addListing={addListing}
             handleLogIn={handleLogIn}
             handleSignUp={signup}
-            handleSearch={search}
             handleUpdate={handleUpdateProfile}
             handleMessage={handleMessage}
             handleBooking={handleBooking}

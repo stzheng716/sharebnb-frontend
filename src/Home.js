@@ -12,7 +12,7 @@ import ListingList from "./ListingList";
  * Renders home page with background
  */
 
-function Home({ listings, handleSearch }) {
+function Home({ listings }) {
   //   const user = useContext(userContext);
   //   const navigate = useNavigate();
 
@@ -26,7 +26,6 @@ function Home({ listings, handleSearch }) {
   return (
     <div className="background">
       <div>
-        <SearchForm handleSearch={handleSearch} />
         <h1 className="displayText">"Discover Your Perfect Escape"</h1>
         <ListingList listings={listings}/>
       </div>
