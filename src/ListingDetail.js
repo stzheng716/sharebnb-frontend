@@ -34,7 +34,7 @@ function ListingDetail({ handleMessage, handleBooking }) {
   if (!listing) return <i>Loading...</i>;
 
   return (
-    <div className="d-flex">
+    <div className="d-flex flex-column">
       <Card style={{ width: "40rem" }} className="m-auto">
         <Card.Body>
           <Card.Img
