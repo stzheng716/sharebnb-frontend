@@ -23,7 +23,7 @@ function App() {
       setListings({ listing: listings, isLoaded: true });
     }
     getListings();
-  }, []);
+  }, [ ]);
 
   useEffect(
     function changeUser() {
@@ -78,7 +78,7 @@ function App() {
 
   async function handleUpdateProfile(formData){
     const username = currUser.user.username
-    const updatedUser = await ShareBnBApi.updateProfile(username, formData)
+    const updatedUser = await ShareBnBApi.updateProfile(formData, username)
     setCurrUser({ user: updatedUser, isLoaded: true });
   }
 

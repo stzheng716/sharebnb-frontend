@@ -1,9 +1,15 @@
 import { useMemo, useState } from 'react';
-import Map, { Marker } from 'react-map-gl';
+import Map, { FullscreenControl, GeolocateControl, Marker, NavigationControl, ScaleControl } from 'react-map-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
+import { useNavigate } from "react-router-dom";
 
 const token = process.env.REACT_APP_MAPBOXTOKEN;
 function MapBox({ listings }) {
+	const navigate = useNavigate();
+
+	function togglePopup(listing) {
+		navigate(`/listings/${listing.id}`)
+	}
 
 	const pin = useMemo(
 		() =>
@@ -12,7 +18,9 @@ function MapBox({ listings }) {
 					key={i}
 					longitude={l.longitude}
 					latitude={l.latitude}
-					anchor="bottom" >
+					anchor="bottom"
+					onClick={() => togglePopup(l)}
+				>
 				</Marker>
 			)),
 		[]
@@ -33,6 +41,9 @@ function MapBox({ listings }) {
 				mapStyle="mapbox://styles/mapbox/navigation-night-v1"
 			>
 				{pin}
+				<FullscreenControl />
+				<GeolocateControl />
+				<NavigationControl />
 			</Map>
 		</div>
 

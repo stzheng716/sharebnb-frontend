@@ -9,11 +9,13 @@ import BookingForm from "./BookingForm";
 import MessageList from "./MessageList";
 import BookingList from "./BookingList";
 import Alert from "./Alert";
+import { useNavigate } from "react-router-dom";
 
 function ListingDetail({ handleMessage, handleBooking }) {
   const { id } = useParams();
 
   const user = useContext(userContext);
+  const navigate = useNavigate();
 
   const [listing, setListing] = useState(null);
   const [errors, setError] = useState([]);
@@ -29,6 +31,20 @@ function ListingDetail({ handleMessage, handleBooking }) {
     }
     fetchListing();
   }, [id]);
+
+  async function handleDelete(evt) {
+    evt.preventDefault();
+    let message;
+    try {
+      message = await ShareBnBApi.deleteListing(id)
+    } catch (err) {
+      setError(err);
+    }
+    
+    //FIXME: fix the render issues with listings
+      //MAY move this func to app.py
+    navigate("/")
+  }
 
   if (errors.length) return <Alert type="danger" messages={errors} />
   if (!listing) return <i>Loading...</i>;
@@ -60,6 +76,11 @@ function ListingDetail({ handleMessage, handleBooking }) {
         <Button variant="primary" href="/">
           Back to All Listings
         </Button>
+        {user.username === listing.username &&
+          <Button variant="danger" className="mt-3" onClick={handleDelete}>
+            Delete this listing
+          </Button>
+        }
         {user.username !== listing.username &&
           <div>
             <MessageForm listing={listing}
@@ -78,7 +99,7 @@ function ListingDetail({ handleMessage, handleBooking }) {
 
       {user.username === listing.username && listing.bookings &&
         <Card style={{ width: "40rem" }} className="m-auto">
-          <BookingList bookings={listing.bookings}/>
+          <BookingList bookings={listing.bookings} />
         </Card>
       }
     </div>

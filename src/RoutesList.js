@@ -24,7 +24,8 @@ function RoutesList({
   listings,
   handleSearch,
   handleMessage,
-  handleBooking
+  handleBooking,
+  handleListingDelete
 }) {
   const user = useContext(userContext);
 

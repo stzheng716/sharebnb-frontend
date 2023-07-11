@@ -33,6 +33,10 @@ class ShareBnBApi {
       return await axios({ url, method, data, params, headers });
     } catch (err) {
       console.error("API Error:", err);
+      if (err.response.data.msg) {
+        let msg = err.response.data.msg;
+        throw Array.isArray(msg) ? msg : [msg];
+      }
       let message = err.response.data.error.message;
       throw Array.isArray(message) ? message : [message];
     }
@@ -100,7 +104,7 @@ class ShareBnBApi {
 
   /** Save user profile page. */
 
-  static async updateProfile(username, data) {
+  static async updateProfile(data, username) {
     const res = await this.request(`users/${username}`, data, "patch");
     return res.data.user;
   }
@@ -113,6 +117,11 @@ class ShareBnBApi {
   static async bookProperty(data) {
     const res = await this.request(`bookings`, data, "post");
     return res.data.user;
+  }
+
+  static async deleteListing(listingId) {
+    const res = await this.request(`listings/${listingId}`, {} ,"delete");
+    return res.data.message;
   }
 }
 

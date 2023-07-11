@@ -13,7 +13,7 @@ import Alert from 'react-bootstrap/Alert';
  * Renders Alert to users
  */
 function Notice({ message, type }) {
-
+    console.log("YOU HIT NOTICE")
     return (
         <div>
             <Alert variant={type}>{message}</Alert>

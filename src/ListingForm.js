@@ -25,7 +25,7 @@ function ListingForm({ addListing }) {
   async function handleSubmit(evt) {
     evt.preventDefault();
     formData.username = user.username
-    const newListing = await addListing(formData);
+    await addListing(formData);
     navigate("/");
   }
 
