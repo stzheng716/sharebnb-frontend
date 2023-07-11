@@ -1,5 +1,5 @@
-import { useMemo, useState } from 'react';
-import Map, { FullscreenControl, GeolocateControl, Marker, NavigationControl, ScaleControl } from 'react-map-gl';
+import { useMemo } from 'react';
+import Map, { FullscreenControl, GeolocateControl, Marker, NavigationControl } from 'react-map-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import { useNavigate } from "react-router-dom";
 
@@ -11,20 +11,17 @@ function MapBox({ listings }) {
 		navigate(`/listings/${listing.id}`)
 	}
 
-	const pin = useMemo(
-		() =>
-			listings.map((l, i) => (
-				<Marker
-					key={i}
-					longitude={l.longitude}
-					latitude={l.latitude}
-					anchor="bottom"
-					onClick={() => togglePopup(l)}
-				>
-				</Marker>
-			)),
-		[]
-	);
+	const pin = useMemo(() =>
+		listings.map((l, i) => (
+			<Marker
+				key={i}
+				longitude={l.longitude}
+				latitude={l.latitude}
+				anchor="bottom"
+				onClick={() => togglePopup(l)}
+			>
+			</Marker>))
+		, []);
 
 	return (
 
