@@ -144,7 +144,7 @@ function ListingForm({ addListing }) {
             </div>
 
             <div className="d-grid">
-              <button className="btn btn-primary">Save Changes</button>
+              <button className="btn btn-primary">Create Listing</button>
             </div>
           </form>
         </div>

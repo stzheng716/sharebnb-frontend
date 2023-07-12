@@ -68,9 +68,9 @@ function ListingDetail({ handleMessage, handleBooking }) {
           <Card.Title>Information</Card.Title>
 
           <Card.Text>
-            <li>{listing.details}</li>
-            <li>{listing.price_per_night}</li>
-            <li>{listing.username}</li>
+            <Card.Text>Details: {listing.ListingDetail}</Card.Text>
+            <Card.Text>${listing.price_per_night}/day</Card.Text>
+            <Card.Text>Host: {listing.username}</Card.Text>
           </Card.Text>
         </Card.Body>
         <Button variant="primary" href="/">

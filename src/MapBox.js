@@ -7,21 +7,18 @@ const token = process.env.REACT_APP_MAPBOXTOKEN;
 function MapBox({ listings }) {
 	const navigate = useNavigate();
 
-	function togglePopup(listing) {
+	function navigateToListing(listing) {
 		navigate(`/listings/${listing.id}`)
 	}
 
-	const pin = useMemo(() =>
-		listings.map((l, i) => (
-			<Marker
-				key={i}
-				longitude={l.longitude}
-				latitude={l.latitude}
-				anchor="bottom"
-				onClick={() => togglePopup(l)}
-			>
-			</Marker>))
-		, []);
+	const pins = listings.map((l, i) => (
+		<Marker
+			key={i}
+			longitude={l.longitude}
+			latitude={l.latitude}
+			anchor="bottom"
+			onClick={() => navigateToListing(l)}
+		></Marker>))
 
 	return (
 
@@ -34,10 +31,10 @@ function MapBox({ listings }) {
 					zoom: 10
 				}}
 				height="100%"
-				style={{ width: "100vw", height: "100vh" }}
+				style={{ width: "100vw", height: "95vh" }}
 				mapStyle="mapbox://styles/mapbox/navigation-night-v1"
 			>
-				{pin}
+				{pins}
 				<FullscreenControl />
 				<GeolocateControl />
 				<NavigationControl />
