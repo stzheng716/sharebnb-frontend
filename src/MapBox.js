@@ -1,4 +1,3 @@
-import { useMemo } from 'react';
 import Map, { FullscreenControl, GeolocateControl, Marker, NavigationControl } from 'react-map-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import { useNavigate } from "react-router-dom";
