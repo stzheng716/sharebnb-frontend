@@ -24,11 +24,11 @@ this project was created with [create react app](https://github.com/facebook/cre
 ## setup:
 * clone this repo
 * in the project directory, you can run:
-##### `npm start`
+## `npm start`
 runs the app in the development mode.
 open [http://localhost:3000](http://localhost:3000) to view it in your browser.*
 
-* ## this application relies on the sharebnb backend api
+#### *this application relies on the sharebnb backend api
 
 * link to the backend api (https://github.com/stzheng716/sharebnb-backend)
 
