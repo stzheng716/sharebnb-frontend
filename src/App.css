@@ -28,6 +28,12 @@
   color: #61dafb;
 }
 
+.loading {
+  background-image: url('https://cdn.dribbble.com/users/63485/screenshots/2513799/media/eaac8e093ac6af985481bd28b8210412.gif');
+  background-position: center;
+  height: 100vh;
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);

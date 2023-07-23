@@ -90,7 +90,9 @@ function App() {
     await ShareBnBApi.bookProperty(formData)
   }
   
-  if (!listings.isLoaded || !currUser.isLoaded) return <i>Loading...</i>;
+  if (!listings.isLoaded || !currUser.isLoaded) {
+    return <div className="loading"></div>
+  }
 
   return (
     <div className="App">
